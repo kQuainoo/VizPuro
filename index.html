@@ -32,6 +32,26 @@
                 center: [-79.526, 43.859], //long, lat
                 zoom: 11.19
             });
+
+            // adding FSA layer
+
+            map.addSource('fsa', {
+                type: 'geojson',
+                data: 'https://raw.githubusercontent.com/kQuainoo/VizPuro/main/FSAJoinMorsePU.geojson',
+                buffer: 0,
+                maxzoom: 12
+            });
+
+            map.addlayer({
+                id: 'fsalayer',
+                type: 'fill',
+                source: 'fsa',
+                layout: {},
+                paint: {
+                    'fill-color': '#f08',
+                    'fill-opacity': 0.2
+                }
+            });
         </script>
     </body>
 </html>
