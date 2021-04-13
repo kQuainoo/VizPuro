@@ -93,7 +93,7 @@
 
         popup
           .setLngLat(feature.geometry.coordinates[0][0])
-          .setHTML(feature.properties.Count_)
+          .setHTML('<h1 wk total \n </h1>' + feature.properties.Count_ )
           .addTo(map);
 
         map.getCanvas().style.cursor = features.length ? "pointer" : "";
