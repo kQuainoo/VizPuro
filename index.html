@@ -34,7 +34,7 @@
 
       var map = new mapboxgl.Map({
         container: "map",
-        style: "mapbox://styles/kquainoo/cklbazkjl2pif17myarsgp9q2",
+        style: "mapbox://styles/kquainoo/ckrausw5r3hki17p9wqam6uht",
         center: [-79.385, 43.659], //long, lat
         //43.65942698849854, -79.38551295824337
         zoom: 11.19,
@@ -43,39 +43,71 @@
       // adding FSA layer
 
       function init() {
-        map.addSource("fsa", {
+    
+        // add pt layer for labelling https://raw.githubusercontent.com/kQuainoo/VizPuro/main/fsacentr_ptv1.geojson
+        map.addSource("FSACentr",{
           type: "geojson",
-          data:
-            "https://raw.githubusercontent.com/kQuainoo/CoolSpacesTO/main/FSAMorsePUConverted.geojson",
-          buffer: 0,
-          maxzoom: 12,
+          data: "https://raw.githubusercontent.com/kQuainoo/VizPuro/main/fsacentr_ptv1.geojson"
         });
-        map.addSource("ONQC", {
+        map.addSource("vaughan",{
           type: "geojson",
-          data: "https://raw.githubusercontent.com/kQuainoo/VizPuro/main/ONQCboundary.geojson",
-          buffer:0,
-          maxzoom:12
-        })
+          data: "https://raw.githubusercontent.com/kQuainoo/VizPuro/main/terminal491.geojson"
+        });
+        map.addSource("misswest",{
+          type: "geojson",
+          data: "https://raw.githubusercontent.com/kQuainoo/VizPuro/main/terminal511.geojson"
+        });
+        map.addSource("laval",{
+          type: "geojson",
+          data: "https://raw.githubusercontent.com/kQuainoo/VizPuro/main/terminal522.geojson"
+        }),
+
         map.addLayer({
-          id: "fsalayer",
+          id: "vaughanlayer",
           type: "fill",
-          source: "fsa",
+          source: "vaughan",
           layout: {},
           paint: {
             "fill-color": "#f08",
             "fill-opacity": 0.2,
           },
         });
+
         map.addLayer({
-          id: "provincelayer",
-          type: "geojson",
-          source: "ONQC",
-          layout:{},
+          id: "misswestlayer",
+          type: "fill",
+          source: "misswest",
+          layout: {},
           paint: {
-            "fill-color":"#f08",
-            "fill-opacity: 0.2
-          }
-        })
+            "fill-color": "#f08",
+            "fill-opacity": 0.2,
+          },
+        });
+        
+        map.addLayer({
+          id: "lavallayer",
+          type: "fill",
+          source: "laval",
+          layout: {},
+          paint: {
+            "fill-color": "#f08",
+            "fill-opacity": 0.2,
+          },
+        });
+     
+        map.addLayer({
+          id: "centrptslayer",
+          type: "symbol",
+          source: "FSACentr",
+          layout: {
+            "icon-image": "triangle-stroked",
+            "icon-size": 0.3,
+            "text-field": "{FSA}",
+            "text-font": ["Open Sans Semibold", "Arial Unicode MS Bold"],
+            "text-offset": [0,0,0],
+            "text-anchor": "top",
+          },
+        });
       };
 
       map.on("load", function (e) {
