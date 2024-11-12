@@ -44,7 +44,8 @@
       // adding FSA layer
 
       function init() {
-    
+        // user interaction
+      map.doubleClickZoom.enable();
         // add pt layer for labelling https://raw.githubusercontent.com/kQuainoo/VizPuro/main/fsacentr_ptv1.geojson
         map.addSource("FSACentr",{
           type: "geojson",
